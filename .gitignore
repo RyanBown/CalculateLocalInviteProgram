@@ -1,0 +1,5 @@
+/v_cic/**
+/data/**.tdf
+**/__pycache__/
+**.pyc
+Leaderboard.xlsx

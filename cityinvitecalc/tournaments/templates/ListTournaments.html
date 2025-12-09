@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#Tournaments {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#Tournaments td, #Tournaments th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#Tournaments tr:nth-child(even){background-color: #f2f2f2;}
+
+#Tournaments tr:hover {background-color: #ddd;}
+
+#Tournaments th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<table id="Tournaments">
+<tr>
+    <th>id</th>
+    <th>event name</th>
+    <th>event date</th>
+    <th>event_type_id</th>
+</tr>
+{% for row in tournaments %}
+    <tr>
+        <td> <a href="/tournaments/view/{{row.id}}" > {{row.id}} </a> </td>
+        <td>{{row.event_name}}</td>
+        <td>{{row.event_date}}</td>
+        <td>{{row.event_type_id}}</td>
+    </tr>
+
+{% endfor %}
+
+
+</table>
+
+</body>
+</html>
