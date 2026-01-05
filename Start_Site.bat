@@ -1,4 +1,4 @@
-start "" http://127.0.0.1/
+start "" http://127.0.0.1:8000/
 
 
 .\v_cic\scripts\python .\cityinvitecalc\manage.py runserver
