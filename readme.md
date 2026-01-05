@@ -1,12 +1,12 @@
-# Calulate Local Invite Program
+# Calculate Local Invite Program (CLIP)
 
 ## Purpose:
 
-This is to help automate the calculation of Championship Points that players have earned in an area.
+CLIP is to help automate the calculation of Championship Points that players have earned in an area.
 
 ## How This Works
 
-These scripts can ingest TDF files that are outputs of TOM. This will ingest the file, grab the trainers, the match results and calculate how much CP they should have as well as Match Points.
+CLIP can ingest TDF files that are outputs of TOM. This will ingest the file, grab the trainers, the match results and calculate how much CP they should have as well as Match Points.
 
 More In depth guide coming soon
 
