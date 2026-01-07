@@ -284,7 +284,7 @@ def GetDataFromTdf(file_path):
 
 
             if detail == 'players':
-                player_data = process_players_section(tournament_detail, tournament_date)
+                player_data = process_players_section(tournament_detail)
 
             if detail == 'pods':
                 pod_data = process_pods_section(tournament_detail)
