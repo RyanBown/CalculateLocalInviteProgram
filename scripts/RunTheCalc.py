@@ -1,8 +1,8 @@
-import scripts.ProcessTdf as ProcessTdf
-import scripts.Insert_Data as Insert_Data
+import ProcessTdf as ProcessTdf
+import Insert_Data as Insert_Data
 import os
 
-import scripts.GetData as GetData
+import GetData as GetData
 
 file_dir = r'.\data'
 
