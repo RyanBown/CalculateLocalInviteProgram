@@ -10,6 +10,6 @@ urlpatterns = [
     path('view_player/<str:player_id>', views.PlayerView, name='player'),
     path('edit_player/<str:player_id>', views.EditPlayerView, name='edit-player'),
     path('players', views.ListPlayersView, name='all-players'),
-    path('view/tdf/', views.TdfView, name='all-tdf'),
-    path('view/tdf/<int:file_id>', views.ModifyTdfView, name='modify-tdf'),
+    path('view_tdf/', views.TdfView, name='all-tdf'),
+    path('view_tdf/tdf/<int:file_id>', views.ModifyTdfView, name='modify-tdf'),
 ]
