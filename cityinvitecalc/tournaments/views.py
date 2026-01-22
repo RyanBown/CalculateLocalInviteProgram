@@ -47,10 +47,12 @@ def EditPlayerView(request, player_id):
     return render(request, "EditPlayer.html", {"form": form})
 
 
+
+
 def TdfView(request):
     file_ran = FileRun.objects.all()
-    return render(request, 'ViewAllTdf.html', content_type={'tdf_files':file_ran})
+    return render(request, 'ViewAllTdf.html', context={'tdf_files':file_ran})
 
 def ModifyTdfView(request, file_id):
     file_path = FileRun.objects.get(id=file_id)
-    return render(request, 'ModifyTdf.html', content_type={'file_path':file_path} )
+    return render(request, 'ModifyTdf.html', view_tdf={'file_path':file_path} )
