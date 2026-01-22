@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+
+<table id="tblPlayer">
+    <tr>
+        th>Attribute</th>
+        th>Current Value</th>
+        th>New Value</th>
+        th>Save</th>
+    </tr>
+    <tr>
+        <td>Pokemon ID</td>
+        <td>{{ player.pokemon_id }}</td>
+        <td> <input type="text" id="txtNewPkmnID"> </td>
+        <td> <button id="btnPkmnId">Save</button>  </td>
+    </tr>
+    <tr>
+        <td>First Name</td>
+        <td>{{ player.first_name }}</td>
+        <td> <input type="text" id="txtNewFirstName"> </td>
+        <td> <button id="btnFirstName">Save</button>  </td>
+    </tr>
+    <tr>
+    <tr>
+        <td>Last Name</td>
+        <td>{{ player.last_name }}</td>
+        <td> <input type="text" id="txtNewLastName"> </td>
+        <td> <button id="btnLastName">Save</button>  </td>
+    </tr>
+</table>
+
+
+
+{% endblock %}
