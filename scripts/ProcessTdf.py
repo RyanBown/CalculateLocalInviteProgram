@@ -33,7 +33,10 @@ def merge_pods(pods):
 
 def CalculateDivision(birthyear, event_date = dt.now() ):
     birth_year = int(birthyear)
-    pokemon_year = fiscalyear.FiscalYear(event_date).fiscal_year
+    event_year = event_date.year
+    event_month = event_date.month
+    event_day = event_date.day
+    pokemon_year = fiscalyear.FiscalDate(year=event_year,month=event_month, day=event_day).fiscal_year
     ma = [MA_START, pokemon_year - MA_END]
     sr = [pokemon_year -SR_START,pokemon_year-SR_END]
     jr = [pokemon_year - JR_START,pokemon_year-JR_END]
