@@ -17,7 +17,7 @@ def TournamentDetailView(request, tournament_id):
     print('tourny_id\n\t',tournament_id)
     this_tournament = TournamentDetail.objects.filter(tournament_id=tournament_id).values('id', 'round', 'table_number', 'result', 'player_id', 'player_id__first_name','player_id__last_name' ) .order_by('round', 'table_number')
     print(this_tournament)
-    return render(request, 'TournamentDetail.html', context= {'this_tournament':this_tournament})
+    return render(request, 'TournamentDetail.html', context= {'this_tournament':this_tournament, 'tournament_id':tournament_id})
 
 def ListPlayersView(request, msg = []):
 
@@ -52,6 +52,11 @@ def EditPlayerView(request, player_id):
 def TdfView(request):
     file_ran = FileRun.objects.all()
     return render(request, 'ViewAllTdf.html', context={'tdf_files':file_ran})
+
+def edit_player_in_tournament(request, tournament_id, player_id):
+    tournament = Tournament.objects.get(id=tournament_id)
+    player = Player.objects.get(pokemon_id=player_id)
+    return render(request, 'EditPlayerInTournament.html', context={"tournament":tournament, "player":player})
 
 def ModifyTdfView(request, file_id):
     file_path = FileRun.objects.get(id=file_id)
