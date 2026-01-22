@@ -10,22 +10,21 @@ def SelectData(select_statement):
 
 def RunData():
     select_statement = '''
-
 select
 	RANK() over (order by total_points desc, match_points desc ) as ranking,
 	first_name || ' ' || 
     CASE 
-        WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name and division = 'MA' AND substr(n2.last_name, 1, 1) = substr(n1.last_name, 1, 1)) = 1 
+        WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name and division_id = '{0}' AND substr(n2.last_name, 1, 1) = substr(n1.last_name, 1, 1)) = 1 
 			THEN substr(n1.last_name, 1, 1) || '.'
-		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name and division = 'MA'  AND substr(n2.last_name, 1, 2) = substr(n1.last_name, 1, 2)) = 1 
+		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name and division_id = '{0}'  AND substr(n2.last_name, 1, 2) = substr(n1.last_name, 1, 2)) = 1 
 			THEN substr(n1.last_name, 1, 2) || '.'
-		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division = 'MA' and substr(n2.last_name, 1, 3) = substr(n1.last_name, 1, 3)) = 1 
+		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division_id = '{0}' and substr(n2.last_name, 1, 3) = substr(n1.last_name, 1, 3)) = 1 
 			THEN substr(n1.last_name, 1, 3) || '.'
-		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division = 'MA' and substr(n2.last_name, 1, 4) = substr(n1.last_name, 1, 4)) = 1 
+		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division_id = '{0}' and substr(n2.last_name, 1, 4) = substr(n1.last_name, 1, 4)) = 1 
 			THEN substr(n1.last_name, 1, 4) || '.'
-		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division = 'MA' and substr(n2.last_name, 1, 5) = substr(n1.last_name, 1, 5)) = 1 
+		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division_id = '{0}' and substr(n2.last_name, 1, 5) = substr(n1.last_name, 1, 5)) = 1 
 			THEN substr(n1.last_name, 1, 5) || '.'
-		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division = 'MA' and substr(n2.last_name, 1, 6) = substr(n1.last_name, 1, 6)) = 1 
+		WHEN (SELECT COUNT(*) FROM tournaments_player n2 WHERE n2.first_name = n1.first_name AND division_id = '{0}' and substr(n2.last_name, 1, 6) = substr(n1.last_name, 1, 6)) = 1 
 			THEN substr(n1.last_name, 1, 6) || '.'
         ELSE substr(n1.last_name, 1, 7) || case when length(last_name) > 7 then  '.' else '' end
     END  AS [Name],
@@ -57,14 +56,14 @@ join (
         join tournaments_championshippoint cs
             on  s.placement >= cs.highest_place
             and s.placement <= cs.lowest_place
-            and cs.kicker <= (select count(*) from tournaments_standing ts where ts.tournament_id = s.tournament_id and ts.division = 'MA'  )
+            and cs.kicker <= (select count(*) from tournaments_standing ts where ts.tournament_id = s.tournament_id and ts.division = '{0}'  )
             and t.event_type_id = cs.event_type_id 
         join tournaments_player p 
             on p.pokemon_id = s.player_id
     where
-        p.division = 'MA'
+        p.division_id = '{0}'
     group by 
-        p.division,
+        p.division_id,
         s.player_id
 
 ) pcp 
@@ -92,7 +91,8 @@ order by
 
 
     for division in ['JR', 'SR', 'MA']:
-        get_data = SelectData(select_statement.format(division))
+        formatted_select_statement = select_statement.format(division)
+        get_data = SelectData(formatted_select_statement)
     
         data = {division:get_data}
         data_sheets.append(data)
@@ -109,3 +109,7 @@ order by
         tournament_data = SelectData(select_tournaments_in_system)
 
         tournament_data.to_excel(writer, sheet_name='events',index=False)
+
+
+if __name__ == '__main__':
+    RunData()
