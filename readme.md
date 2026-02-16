@@ -14,13 +14,3 @@ More In depth guide coming soon
 
 1. Install Python 3.13 (or the newest version [https://www.python.org/downloads/](https://www.python.org/downloads/) )
 2. Run GetStarted.bat by clicking [here](./GetStated.bat)
-
-# Help Guide
-
-## Change Name of One Trainer
-
-The purpose of this is if the display name on the leaderboard is not correct and needs to change.
-
-## Fix a trainer was put in as the wrong ID
-
-The purpose of this if a trainer put in the wrong ID at an event.
