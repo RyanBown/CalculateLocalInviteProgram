@@ -61,3 +61,11 @@ def edit_player_in_tournament(request, tournament_id, player_id):
 def ModifyTdfView(request, file_id):
     file_path = FileRun.objects.get(id=file_id)
     return render(request, 'ModifyTdf.html', view_tdf={'file_path':file_path} )
+
+
+def LeaderboardView(request):
+    leaderboards = get_data_for
+    ma_leaderboard = ''
+    sr_leaderboard = ''
+    jr_leaderboard = ''
+    return render(request, 'ModifyTdf.html', leaderboard={'file_path':file_path} )
