@@ -122,7 +122,7 @@ STATIC_ROOT = BASE_DIR / 'prodfiles'
 
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'mystaticfiles'
+    BASE_DIR / 'static'
 ]
 
 
