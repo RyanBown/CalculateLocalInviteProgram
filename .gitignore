@@ -3,3 +3,7 @@
 **/__pycache__/
 **.pyc
 Leaderboard.xlsx
+/cityinvitecalc/prodfiles/**
+cityinvitecalc/TournamentData.db
+git-filter-repo.py
+.vscode/launch.json

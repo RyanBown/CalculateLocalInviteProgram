@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+  <a>Home</a>
+
+{% for division,leaderboard in leaderboards %}
+    <table id="tbl_{{division}}_leaderboard">
+        <tr>
+            <th>placement</th>
+            <th>name</th>
+            <th>Championship Points</th>
+            <th>Match Points</th>
+        </tr>
+        {% for player in leaderboard %}
+        <tr>
+            <td>{{player.placement}}</td>
+            <td>{{player.display_name}}</td>
+            <td>{{player.champ_points}}</td>
+            <td>{{player.match_points}}</td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+{% endfor %}
+{% endblock %}

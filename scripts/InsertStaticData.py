@@ -1,4 +1,6 @@
 import sqlite3
+import sys
+
 
 def InsertData(insert_statement):
     with sqlite3.connect("./cityinvitecalc/TournamentData.db") as conn:
@@ -38,8 +40,34 @@ def InsertChampionshipPoints():
     InsertData(insert_eventTypes)
 
 
+def InsertDivision():
+    insert_division = '''
+    insert into tournaments_division
+    (name, sort_order)
+    values
+    ('JR', 1),
+    ('SR', 2),
+    ('MA', 3)
+'''
+    InsertData(insert_division)
 
 
 
-InsertEventTypes()
-InsertChampionshipPoints()
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    if args == []:
+        InsertEventTypes()
+        InsertChampionshipPoints()
+        InsertDivision()
+    else:
+        for arg in args:
+            if arg == 'event_types':
+                InsertEventTypes()
+                continue
+            if arg == 'championship_points':
+                InsertChampionshipPoints()
+                continue
+            if arg == 'division':
+                InsertDivision()
+                continue
+

@@ -1,15 +1,3 @@
-import sqlite3
-import pandas as pd
-
-
-def SelectData(select_statement):
-    with sqlite3.connect("./cityinvitecalc/TournamentData.db") as conn:
-        df = pd.read_sql_query(select_statement, conn)
-        return df
-        
-
-def RunData():
-    select_statement = '''
 select
 	RANK() over (order by total_points desc, match_points desc ) as ranking,
 	first_name || ' ' || 
@@ -73,43 +61,3 @@ join
 		on pcp.player_id = n1.pokemon_id
 order by 
 	ranking
-'''
-
-    select_tournaments_in_system = '''
-    select 
-        event_name as [Event Name],
-        event_date as [Event Date]
-    from tournaments_tournament 
-    order by 
-        event_date desc
-'''
-
-
-
-
-    data_sheets = []
-
-
-    for division in ['JR', 'SR', 'MA']:
-        formatted_select_statement = select_statement.format(division)
-        get_data = SelectData(formatted_select_statement)
-    
-        data = {division:get_data}
-        data_sheets.append(data)
-
-    file_name = 'Leaderboard.xlsx'
-    with pd.ExcelWriter(file_name) as writer:
-
-        ##headers = ['player_id', 'first_name', 'Last Name', 'Standing', 'Total_points']
-        for division in data_sheets:
-            key = list(division.keys())[0]
-            standings = division[key]
-            standings.to_excel(writer, sheet_name=key, index=False)
-
-        tournament_data = SelectData(select_tournaments_in_system)
-
-        tournament_data.to_excel(writer, sheet_name='events',index=False)
-
-
-if __name__ == '__main__':
-    RunData()

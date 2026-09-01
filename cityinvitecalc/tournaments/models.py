@@ -13,12 +13,18 @@ class Tournament(models.Model):
     event_name = models.CharField(max_length=100)
     event_date = models.DateField()
 
+class Division(models.Model):
+    name = models.CharField(max_length=3, primary_key=True)
+    sort_order = models.IntegerField()
+
+    
+
 class Player(models.Model):
     pokemon_id = models.CharField(max_length=10, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     birth_year = models.IntegerField()
-    division = models.CharField(max_length=3)
+    division = models.ForeignKey(Division, on_delete=models.DO_NOTHING)
 
     @property
     def player_name(self):

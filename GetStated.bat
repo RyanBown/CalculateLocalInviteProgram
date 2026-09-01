@@ -25,6 +25,8 @@ python -m venv v_cic
 
 .\v_cic\scripts\python .\scripts\InsertStaticData.py
 
+if not exist "data" mkdir "data"
+
 
 echo "Done Creating, insert data into the Data Folder"
 echo "Continue with CreateLeaderboard"

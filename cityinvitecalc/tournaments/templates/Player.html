@@ -1,55 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-#Tournaments {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#Tournaments td, #Tournaments th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#Tournaments tr:nth-child(even){background-color: #f2f2f2;}
-
-#Tournaments tr:hover {background-color: #ddd;}
-
-#Tournaments th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-</head>
-<body>
+{% extends "base.html" %}
 
 
-<table id="Tournaments">
+{% block title %}Player {{player.first_name}} {{ player.last_name}}  {% endblock %}
+
+
+{% block content %}
+
+<table id="tblPlayer">
 <tr>
     <th>Pokemon ID</th>
     <th>First Name</th>
     <th>Last Name</th>
     <th>Birth Year</th>
     <th>Division</th>
+    
 </tr>
-{% for row in player %}
     <tr>
-        <td> <a > {{row.pokemon_id}} </a> </td>
-        <td>{{row.first_name}}</td>
-        <td>{{row.last_name}}</td>
-        <td>{{row.birth_year}}</td>
-        <td>{{row.division}}</td>
+        <td>  {{player.pokemon_id}} </td>
+        <td>{{player.first_name}}</td>
+        <td>{{player.last_name}}</td>
+        <td>{{player.birth_year}}</td>
+        <td>{{player.division.name}}</td>
     </tr>
 
-{% endfor %}
 
 
 </table>
 
-</body>
-</html>
+
+
+
+{% endblock %}
+

@@ -5,10 +5,14 @@ from thefuzz import fuzz
 ## cityinvitecalc\TournamentData.db
 
 def InsertData(insert_statement, variables):
-    with sqlite3.connect("./cityinvitecalc/TournamentData.db") as conn:
-        cur = conn.cursor()
-        cur.execute(insert_statement, variables)
-        conn.commit()
+    try:
+        with sqlite3.connect("./cityinvitecalc/TournamentData.db") as conn:
+            cur = conn.cursor()
+            cur.execute(insert_statement, variables)
+            conn.commit()
+    except sqlite3.IntegrityError as e:
+        print('This Data ', variables, 'is already in database\n\t', str(e) )
+        print('Integrity Error!!!\n\t',str(e) )
 
 def SelectData(select_statement):
     with sqlite3.connect("./cityinvitecalc/TournamentData.db") as conn:
@@ -58,7 +62,7 @@ def InsertPlayersData(player_data):
     pokemon_id, 
     first_name, 
     last_name, 
-    division 
+    division_id
     from tournaments_player
 '''
     players_in_system = SelectData(select_players).fetchall()
@@ -66,7 +70,7 @@ def InsertPlayersData(player_data):
 
     insert_player = '''
     insert into tournaments_player
-    (pokemon_id, first_name, last_name, birth_year, division )
+    (pokemon_id, first_name, last_name, birth_year, division_id )
     values (
     ?, ?, ?, ?, ?
     )
