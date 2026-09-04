@@ -12,11 +12,11 @@ from datetime import datetime as dt
 MA_START = 1900
 
 ## take the current FY and minus this to get age division
-MA_END = 16
-SR_START = 15
-SR_END = 12
-JR_START = 11
-JR_END = 5
+MA_END = 17
+SR_START = 16
+SR_END = 13
+JR_START = 12
+JR_END = 6
 
 
 
